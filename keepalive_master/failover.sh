@@ -6,6 +6,7 @@ SLACK_WEBHOOK=https://hooks.slack.com/services/T6G9ZD6H2/BM9CRR1E2/9ZivqnmyPA59X
 ELASTIC_IP=35.154.77.94
 INSTANCE_ID=i-0c1ad322b345f3997
 TYPE_NODE=MASTER
+BP_NAME=LondonBP
 
 # These are sent via keepalived
 TYPE=$1
@@ -18,7 +19,7 @@ function notify()
 {
     MESSAGE=$1
     echo $MESSAGE
-    [[ ! -z $SLACK_WEBHOOK ]] && curl -s -X POST --data-urlencode "payload={\"channel\": \"#can-testnet\", \"username\": \"MumbaiBP-Master\", \"text\": \"$MESSAGE\", \"icon_emoji\": \":ghost:\"}" $SLACK_WEBHOOK > /dev/null
+    [[ ! -z $SLACK_WEBHOOK ]] && curl -s -X POST --data-urlencode "payload={\"channel\": \"#can-testnet\", \"username\": \"$BP_NAME\", \"text\": \"$MESSAGE\", \"icon_emoji\": \":ghost:\"}" $SLACK_WEBHOOK > /dev/null
 }
 
 function update_elastic_ip()
